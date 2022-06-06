@@ -16,7 +16,10 @@ const actions = {
         commit('new_todo', todoItem)
     },
     deleteTodo({commit}, todoItem) {
-        commit('detele_doto', todoItem)
+        commit('delete_todo', todoItem)
+    },
+    toggleTodo({commit}, todoItem) {
+        commit('toggle_todo', todoItem)
     }
 }
 
@@ -27,13 +30,22 @@ const mutations = {
             completed: false
         })
     },
-    detele_doto(state, todoItem) {
+    delete_todo(state, todoItem) {
         let index = state.todos.indexOf(todoItem)
         state.todos.splice(index, 1)
+    },
+    toggle_todo(state, todoItem) {
+        todoItem.completed = !todoItem.completed
     }
 }
 
-const getters = {}
+const getters = {
+    completedTodos(state) {
+        return state.todos.filter(todo => {
+            return todo.completed === true
+        }).length
+    }
+}
 
 export default {
     namespaced: true,

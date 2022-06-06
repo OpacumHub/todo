@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col">
         <h1>TodoList Vue 3 + Vuex 4 + Laravel 9</h1>
+        <h3>Задач выполнено: {{completedTodos}}</h3>
         <TodoList/>
         <TodoForm/>
       </div>
@@ -10,6 +11,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from "vuex"
 import TodoList from './components/TodoList.vue'
 import TodoForm from './components/TodoForm.vue'
 
@@ -18,6 +20,11 @@ export default {
   components: {
     TodoList,
     TodoForm
+  },
+  computed: {
+    ...mapGetters(({
+      completedTodos: 'main/completedTodos'
+    }))
   }
 }
 </script>
