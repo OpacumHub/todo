@@ -1,6 +1,6 @@
 <template>
   <tr v-bind:class="[todo.completed ? 'table-success' : 'table-danger']">
-    <th scope="row">{{ indexOf }}</th>
+    <th @click="toggleItem" scope="row">{{ indexOf }}</th>
     <td>
       <p v-bind:class="[todo.completed ? 'text-decoration-line-through' : '']">{{ todo.title }}</p>
     </td>
@@ -25,13 +25,14 @@
 </template>
 
 <script>
+import {mapActions} from "vuex"
 export default {
   name: 'ToDo',
   props: ['todo', 'indexOf'],
   methods: {
-    deleteItem() {
-      this.$store.dispatch('main/deleteTodo', this.todo)
-    },
+    ...mapActions(({
+      deleteItem: 'main/deleteTodo'
+    })),
     toggleItem() {
       this.$store.dispatch('main/toggleTodo', this.todo)
     }
