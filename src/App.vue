@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col">
         <h1>TodoList Vue 3 + Vuex 4 + Laravel 9</h1>
-        <h3>Задач выполнено: {{completedTodos}}</h3>
+
+        <div class="d-flex justify-content-between">
+          <h4>Задач выполнено: {{completedTodos}}</h4>
+          <h4>Задач в работе: {{pendingTodos}}</h4>
+        </div>
         <TodoList/>
         <TodoForm/>
       </div>
@@ -23,7 +27,8 @@ export default {
   },
   computed: {
     ...mapGetters(({
-      completedTodos: 'main/completedTodos'
+      completedTodos: 'main/completedTodos',
+      pendingTodos: 'main/pendingTodos'
     }))
   }
 }
